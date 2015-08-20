@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using PicBoy.Core.Models;
 
 namespace PicBoy
 {
@@ -23,6 +14,34 @@ namespace PicBoy
         public MainWindow()
         {
             InitializeComponent();
+            LogoText.Text = @"    ____  _            ____                   _____________  ____ 
+   / __ \(_)____      / __ )____  __  __     <  / ____/ __ \/ __ \
+  / /_/ / / ___/_____/ __  / __ \/ / / /_____/ /___ \/ / / / / / /
+ / ____/ / /__/_____/ /_/ / /_/ / /_/ /_____/ /___/ / /_/ / /_/ / 
+/_/   /_/\___/     /_____/\____/\__, /     /_/_____/\____/\____/  
+                               /____/                             ";
+
+            var items = new List<Event>
+            {
+                new Event() { Name = "test 1", DateBegin = DateTime.Now },
+                new Event() { Name = "test test test test test test test 2", DateBegin = DateTime.Now },
+                new Event() { Name = "test 3", DateBegin = DateTime.Now }
+            };
+
+            ListBox.ItemsSource = items;
+        }
+
+        private void LogoText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

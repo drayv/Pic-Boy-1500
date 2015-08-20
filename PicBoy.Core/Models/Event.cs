@@ -2,7 +2,7 @@
 
 namespace PicBoy.Core.Models
 {
-    class Event
+    public class Event
     {
         public int Id { get; set; }
 
