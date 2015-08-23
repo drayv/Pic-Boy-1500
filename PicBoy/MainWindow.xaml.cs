@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using PicBoy.Core.Models;
+using PicBoy.Core.DataAccess;
 
 namespace PicBoy
 {
@@ -21,14 +19,8 @@ namespace PicBoy
 /_/   /_/\___/     /_____/\____/\__, /     /_/_____/\____/\____/  
                                /____/                             ";
 
-            var items = new List<Event>
-            {
-                new Event() { Name = "test 1", DateBegin = DateTime.Now },
-                new Event() { Name = "test test test test test test test 2", DateBegin = DateTime.Now },
-                new Event() { Name = "test 3", DateBegin = DateTime.Now }
-            };
-
-            ListBox.ItemsSource = items;
+            var repo = new EventRepository();
+            EventList.ItemsSource = repo.GetAll();
         }
 
         private void LogoText_MouseDown(object sender, MouseButtonEventArgs e)
