@@ -7,7 +7,7 @@ namespace PicBoy.Core.DataAccess
     /// <summary>
     /// Represents a Unit Of Work with PicBoy database.
     /// </summary>
-    class PicBoyContainer : DbContext
+    public class PicBoyContainer : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PicBoyContainer"/> class.

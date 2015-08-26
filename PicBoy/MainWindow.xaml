@@ -3,25 +3,169 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="PicBoyWindow" mc:Ignorable="d" x:Class="PicBoy.MainWindow"
-    Title="MainWindow" Height="350" Width="525" Background="#FF081105" WindowStartupLocation="CenterScreen"
-    SnapsToDevicePixels="True" WindowStyle="None">
+    Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen"
+    SnapsToDevicePixels="True" WindowStyle="None" Background="{DynamicResource FormBackground}">
     <Window.Effect>
         <BlurEffect Radius="1"/>
     </Window.Effect>
-    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+    <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="LogoText" Grid.Row="0" Text="Logo here!" Foreground="LimeGreen" TextWrapping="NoWrap" Margin="6,0,0,0"
+        <TextBlock x:Name="LogoText" Grid.Row="0" Text="Logo here!" Foreground="{DynamicResource GreenForeground}" TextWrapping="NoWrap" Margin="6,0,0,0"
                    FontFamily="Courier New" MouseDown="LogoText_MouseDown"/>
-        <Button x:Name="NewEvent" Grid.Row="1" Content="New event!" Background="{x:Null}" BorderBrush="AntiqueWhite" Foreground="AntiqueWhite" 
-                Margin="6,6,0,6" Width="100" HorizontalAlignment="Left" FontFamily="Courier New"/>
-        <Button x:Name="Exit" Grid.Row="1" Content="Exit!" Background="{x:Null}" BorderBrush="AntiqueWhite" Foreground="AntiqueWhite" 
-                Margin="120,6,0,6" Width="100" HorizontalAlignment="Left" FontFamily="Courier New" Click="Exit_Click"/>
+        <Button x:Name="NewEvent" Grid.Row="1" Content="New event!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="6,6,0,6" Width="100" HorizontalAlignment="Left" 
+                FontFamily="Courier New" Click="NewEvent_Click"/>
+        <Button x:Name="Exit" Grid.Row="1" Content="Exit!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="120,6,0,6" Width="100" HorizontalAlignment="Left" 
+                FontFamily="Courier New" Click="Exit_Click"/>
         <ListBox x:Name="EventList" Grid.Row="2" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" 
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="Auto">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="Auto">
+            <ListBox.Resources>
+
+                <SolidColorBrush x:Key="BorderBrush" Color="Transparent" />
+                <SolidColorBrush x:Key="Background" Color="{DynamicResource WhiteColor}" />
+                <SolidColorBrush x:Key="Foreground" Color="{DynamicResource FormBackgroundColor}" />
+
+                <Style TargetType="ScrollBar">
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Style.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="Width" Value="30"/>
+                            <Setter Property="Height" Value="Auto" />
+                            <Setter Property="Template" Value="{DynamicResource VerticalScrollBar}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
+                    <Setter Property="Panel.ZIndex" Value="1" />
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Setter Property="Focusable" Value="false"/>
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="Opacity" Value="0.7" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                <Border
+                                    Name="Border" 
+                                    CornerRadius="3"
+                                    Background="{StaticResource Background}"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="2">
+                                    <Path
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Fill="{StaticResource Foreground}"
+                                        Data="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="Border" Property="Margin" Value="-5" />
+                                        <Setter TargetName="Border" Property="Panel.ZIndex" Value="99999" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+                    <Setter Property="Panel.ZIndex" Value="1" />
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter Property="Focusable" Value="false"/>
+                    <Setter Property="Opacity" Value="0.7" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Border Name="Border"
+                                        CornerRadius="3"
+                                        Background="{StaticResource Background}"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="1" />
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsDragging" Value="true">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource Background}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+                    <Setter Property="Panel.ZIndex" Value="0" />
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter Property="Focusable" Value="false"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                <Border Background="{StaticResource Background}" CornerRadius="3"
+                                        Opacity="0.2" BorderBrush="Transparent"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition MaxHeight="25"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition MaxHeight="25"/>
+                        </Grid.RowDefinitions>
+                        <Border
+                            Grid.RowSpan="3"
+                            Background="Transparent"
+                            BorderBrush="Transparent" />
+                        <RepeatButton
+                            Grid.Row="0"                          
+                            Style="{StaticResource ScrollBarButton}"
+                            Content="M 0 4 L 8 4 L 4 0 Z">
+                            <RepeatButton.Command>ScrollBar.LineUpCommand</RepeatButton.Command>
+                        </RepeatButton>
+                        <Track
+                            Name="PART_Track"
+                            Grid.Row="1"
+                            IsDirectionReversed="true">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton
+                                    Style="{StaticResource ScrollBarPageButton}"
+                                    Margin="11,2,11,2">
+                                    <RepeatButton.Command>ScrollBar.PageUpCommand</RepeatButton.Command>
+                                </RepeatButton>
+                            </Track.DecreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource ScrollBarThumb}" Margin="10,2,10,2"/>
+                            </Track.Thumb>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton
+                                    Style="{StaticResource ScrollBarPageButton}"
+                                    Margin="11,2,11,2">
+                                    <RepeatButton.Command>ScrollBar.PageDownCommand</RepeatButton.Command>
+                                </RepeatButton>
+                            </Track.IncreaseRepeatButton>
+                        </Track>
+                        <RepeatButton
+                            Grid.Row="2"
+                            Style="{StaticResource ScrollBarButton}"
+                            Content="M 0 0 L 4 4 L 8 0 Z">
+                            <RepeatButton.Command>ScrollBar.LineDownCommand</RepeatButton.Command>
+                        </RepeatButton>
+                    </Grid>
+                </ControlTemplate>
+            </ListBox.Resources>
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
@@ -33,8 +177,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}" Foreground="AntiqueWhite" VerticalAlignment="Center" 
-                                   TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}" Foreground="{DynamicResource WhiteForeground}"
+                                       VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
                         </Grid>
                         <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -44,16 +188,18 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding DateBegin, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="LimeGreen"
+                            <TextBlock Grid.Column="0" Text="{Binding DateBegin, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="{DynamicResource GreenForeground}"
                                        VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
-                            <TextBlock Grid.Column="1" Text=" - " Foreground="AntiqueWhite" VerticalAlignment="Center"
+                            <TextBlock Grid.Column="1" Text=" - " Foreground="{DynamicResource WhiteForeground}" VerticalAlignment="Center"
                                        TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
-                            <TextBlock Grid.Column="2" Text="{Binding DateEnd, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="YellowGreen"
+                            <TextBlock Grid.Column="2" Text="{Binding DateEnd, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="{DynamicResource YellowForeground}"
                                        VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
                             <Button x:Name="EditEvent" Grid.Column="3" Content="/" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
-                                    Background="{x:Null}" BorderBrush="AntiqueWhite" Foreground="LimeGreen" FontFamily="Courier New" />
+                                    Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource GreenForeground}" 
+                                    FontFamily="Courier New" />
                             <Button x:Name="DeleteEvent" Grid.Column="4" Content="X" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
-                                    Background="{x:Null}" BorderBrush="AntiqueWhite" Foreground="OrangeRed" FontFamily="Courier New" />
+                                    Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource RedForeground}" 
+                                    FontFamily="Courier New" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

@@ -1,0 +1,21 @@
+﻿<Window x:Class="PicBoy.AddEvent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddEvent" Height="149" Width="265" Background="{DynamicResource FormBackground}" WindowStyle="None" 
+        WindowStartupLocation="CenterOwner">
+    <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="LogoText" Grid.Row="0" Text="Logo here!" Foreground="{DynamicResource GreenForeground}" TextWrapping="NoWrap" Margin="6,0,0,0"
+                   FontFamily="Courier New" MouseDown="LogoText_MouseDown" />
+        <Button x:Name="SaveEvent" Grid.Row="2" Content="Save event!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="6,6,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
+                FontFamily="Courier New" VerticalAlignment="Bottom" Click="SaveEvent_Click" />
+        <Button x:Name="Cancel" Grid.Row="2" Content="Cancel!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="120,6,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
+                FontFamily="Courier New" VerticalAlignment="Bottom" Click="Close_Click" />
+    </Grid>
+</Window>
