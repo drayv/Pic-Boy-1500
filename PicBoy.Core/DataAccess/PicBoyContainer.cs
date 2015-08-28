@@ -39,6 +39,9 @@ namespace PicBoy.Core.DataAccess
     /// <typeparam name="TContext">Database context.</typeparam>
     public class CreateDatabaseIfNotExistsInitializer<TContext> : CreateDatabaseIfNotExists<TContext> where TContext : DbContext
     {
+        /// <summary>
+        /// Database context.
+        /// </summary>
         private DbContext _context;
 
         /// <summary>

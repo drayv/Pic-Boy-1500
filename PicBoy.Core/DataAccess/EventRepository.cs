@@ -12,6 +12,9 @@ namespace PicBoy.Core.DataAccess
     /// </summary>
     public class EventRepository : IDisposable
     {
+        /// <summary>
+        /// Database context.
+        /// </summary>
         private DbContext _context;
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace PicBoy.Core.DataAccess
         public void Delete(int id)
         {
             var dbSet = _context.Set<Event>();
-            var entity = new Event {Id = id};
+            var entity = new Event { Id = id };
             dbSet.Attach(entity);
             dbSet.Remove(entity);
         }
@@ -93,7 +96,9 @@ namespace PicBoy.Core.DataAccess
             return _context.SaveChanges();
         }
 
-        /// <summary>Makes query to table by using "where" predicate and "include(join) properties".</summary>
+        /// <summary>
+        /// Makes query to table by using "where" predicate and "include(join) properties".
+        /// </summary>
         /// <typeparam name="TSource">Entity type.</typeparam>
         /// <param name="table">Entity framework table.</param>
         /// <param name="whereProperties">Where predicate.</param>

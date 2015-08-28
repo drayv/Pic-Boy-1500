@@ -4,10 +4,11 @@ using System.Windows.Input;
 using PicBoy.Core.Logic;
 using PicBoy.Core.Models;
 
-namespace PicBoy
+namespace PicBoy.Forms
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// The DrayvCo Pic-Boy-1500.
+    /// Personal Information Calendar.
     /// </summary>
     public partial class MainWindow
     {
@@ -21,6 +22,9 @@ namespace PicBoy
         /// </summary>
         public readonly EventWorker EventWorker;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -36,9 +40,12 @@ namespace PicBoy
             EventList.ItemsSource = Events;
         }
 
+        /// <summary>
+        /// Opens dialog to create new event.
+        /// </summary>
         private void NewEvent_Click(object sender, RoutedEventArgs e)
         {
-            var addEventForm = new AddEvent(Events, EventWorker)
+            var addEventForm = new AddEvent(Events)
             {
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -51,6 +58,9 @@ namespace PicBoy
             addEventForm.ShowDialog();
         }
 
+        /// <summary>
+        /// Represents ability to drag window.
+        /// </summary>
         private void LogoText_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -59,6 +69,11 @@ namespace PicBoy
             }
         }
 
+        /// <summary>
+        /// Closes the program.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -1,7 +1,7 @@
 ﻿<Application x:Class="PicBoy.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Forms/MainWindow.xaml">
     <Application.Resources>
         <Brush x:Key="FormBackground">#FF081105</Brush>
         <Color x:Key="FormBackgroundColor">#FF081105</Color>
@@ -10,6 +10,7 @@
         <Color x:Key="WhiteColor">AntiqueWhite</Color>
         <Brush x:Key="GreenForeground">LimeGreen</Brush>
         <Brush x:Key="YellowForeground">YellowGreen</Brush>
+        <Brush x:Key="EditForeground">Yellow</Brush>
         <Brush x:Key="RedForeground">OrangeRed</Brush>
     </Application.Resources>
 </Application>

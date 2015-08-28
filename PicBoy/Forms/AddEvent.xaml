@@ -1,4 +1,4 @@
-﻿<Window x:Class="PicBoy.AddEvent"
+﻿<Window x:Class="PicBoy.Forms.AddEvent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddEvent" Height="149" Width="265" Background="{DynamicResource FormBackground}" WindowStyle="None" 
@@ -16,6 +16,6 @@
                 FontFamily="Courier New" VerticalAlignment="Bottom" Click="SaveEvent_Click" />
         <Button x:Name="Cancel" Grid.Row="2" Content="Cancel!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
                 Foreground="{DynamicResource WhiteForeground}" Margin="120,6,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
-                FontFamily="Courier New" VerticalAlignment="Bottom" Click="Close_Click" />
+                FontFamily="Courier New" VerticalAlignment="Bottom" Click="Cancel_Click" />
     </Grid>
 </Window>

@@ -5,7 +5,7 @@ using System.Windows.Input;
 using PicBoy.Core.Logic;
 using PicBoy.Core.Models;
 
-namespace PicBoy
+namespace PicBoy.Forms
 {
     /// <summary>
     /// Interaction logic for AddEvent.xaml
@@ -29,19 +29,29 @@ namespace PicBoy
         {
         }
 
-        public AddEvent(ObservableCollection<Event> events, EventWorker eventWorker)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddEvent"/> class.
+        /// </summary>
+        /// <param name="events">Observable collection of events to work with.</param>
+        public AddEvent(ObservableCollection<Event> events)
         {
             Events = events;
-            EventWorker = eventWorker;
+            EventWorker = new EventWorker();
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Saves event to storage, and returns us to main window.
+        /// </summary>
         private void SaveEvent_Click(object sender, RoutedEventArgs e)
         {
-            Events.Add(new Event {DateBegin = DateTime.Now, Name = "test event."});
-            Close_Click(sender, e);
+            Events.Add(new Event { DateBegin = DateTime.Now, Name = "test event." });
+            CloseChildWindow();
         }
 
+        /// <summary>
+        /// Represents ability to drag window.
+        /// </summary>
         private void LogoText_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -50,7 +60,18 @@ namespace PicBoy
             }
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Returns us to main window without any changes in storage.
+        /// </summary>
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            CloseChildWindow();
+        }
+
+        /// <summary>
+        /// Returns us to main window without any changes in storage.
+        /// </summary>
+        private void CloseChildWindow()
         {
             Owner.Width = Width;
             Owner.Height = Height;

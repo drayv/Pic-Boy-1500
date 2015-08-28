@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="PicBoyWindow" mc:Ignorable="d" x:Class="PicBoy.MainWindow"
+    x:Name="PicBoyWindow" mc:Ignorable="d" x:Class="PicBoy.Forms.MainWindow"
     Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen"
     SnapsToDevicePixels="True" WindowStyle="None" Background="{DynamicResource FormBackground}">
     <Window.Effect>
@@ -165,7 +165,7 @@
                     </Grid>
                 </ControlTemplate>
             </ListBox.Resources>
-            
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
@@ -195,7 +195,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding DateEnd, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="{DynamicResource YellowForeground}"
                                        VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
                             <Button x:Name="EditEvent" Grid.Column="3" Content="/" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
-                                    Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource GreenForeground}" 
+                                    Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource EditForeground}" 
                                     FontFamily="Courier New" />
                             <Button x:Name="DeleteEvent" Grid.Column="4" Content="X" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
                                     Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource RedForeground}" 
