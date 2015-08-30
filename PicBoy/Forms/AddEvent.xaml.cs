@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using PicBoy.Core.Logic;
 using PicBoy.Core.Models;
+using PicBoy.Utility;
 
 namespace PicBoy.Forms
 {
@@ -38,6 +39,9 @@ namespace PicBoy.Forms
             Events = events;
             EventWorker = new EventWorker();
             InitializeComponent();
+
+            DateStartPick.Value = DateTime.Now.StartOfDay();
+            DateEndPick.Value = DateTime.Now.EndOfDay();
         }
 
         /// <summary>

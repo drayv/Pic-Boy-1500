@@ -1,21 +1,35 @@
 ﻿<Window x:Class="PicBoy.Forms.AddEvent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddEvent" Height="149" Width="265" Background="{DynamicResource FormBackground}" WindowStyle="None" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="AddEvent" Height="350" Width="550" Background="{DynamicResource FormBackground}" WindowStyle="None" 
         WindowStartupLocation="CenterOwner">
     <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Label Grid.Row="1" Content="Event name:" Foreground="{DynamicResource WhiteForeground}" HorizontalAlignment="Left" Margin="0,6,0,0"  />
+        <TextBox x:Name="EventName" Width="Auto" Height="20" Grid.Row="1" Margin="80,6,6,0" Background="{x:Null}"
+                 BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource WhiteForeground}" />
+        <Label Grid.Row="3" Content="Event starts:" Foreground="{DynamicResource WhiteForeground}" HorizontalAlignment="Left"  />
+        <xctk:DateTimePicker x:Name="DateStartPick" Grid.Row="3" Height="20" Width="130" AllowSpin="True" CultureInfo="en" HorizontalAlignment="Left" 
+                             Format="Custom" FormatString="dd:MM:yyyy HH:mm" Margin="80,0,0,0" Background="{x:Null}"
+                 BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource WhiteForeground}" TextAlignment="Center" BorderThickness="1" />
+        <Label Grid.Row="3" Content="Ends:" Foreground="{DynamicResource WhiteForeground}" HorizontalAlignment="Left" Margin="215,0,0,0" />
+        <xctk:DateTimePicker x:Name="DateEndPick" Grid.Row="3" Height="20" Width="130" AllowSpin="True" CultureInfo="en" HorizontalAlignment="Left" 
+                             Format="Custom" FormatString="dd:MM:yyyy HH:mm" Margin="260,0,0,0" Background="{x:Null}"
+                 BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource WhiteForeground}" TextAlignment="Center" BorderThickness="1" />
         <TextBlock x:Name="LogoText" Grid.Row="0" Text="Logo here!" Foreground="{DynamicResource GreenForeground}" TextWrapping="NoWrap" Margin="6,0,0,0"
                    FontFamily="Courier New" MouseDown="LogoText_MouseDown" />
-        <Button x:Name="SaveEvent" Grid.Row="2" Content="Save event!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
-                Foreground="{DynamicResource WhiteForeground}" Margin="6,6,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
+        <Button x:Name="SaveEvent" Grid.Row="4" Content="Save event!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="6,16,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
                 FontFamily="Courier New" VerticalAlignment="Bottom" Click="SaveEvent_Click" />
-        <Button x:Name="Cancel" Grid.Row="2" Content="Cancel!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
-                Foreground="{DynamicResource WhiteForeground}" Margin="120,6,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
+        <Button x:Name="Cancel" Grid.Row="4" Content="Cancel!" Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" 
+                Foreground="{DynamicResource WhiteForeground}" Margin="120,16,0,6" Width="100" Height="20" HorizontalAlignment="Left" 
                 FontFamily="Courier New" VerticalAlignment="Bottom" Click="Cancel_Click" />
     </Grid>
 </Window>
