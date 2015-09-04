@@ -49,13 +49,16 @@ namespace PicBoy.Forms
             EventWorker = new EventWorker();
             InitializeComponent();
 
+            var currentTime = DateTime.Now;
+            currentTime = currentTime.AddMilliseconds(-currentTime.Millisecond);
+
             if (ManagedEvent == null)
             {
                 ManagedEvent = new Event
                 {
                     Name = "",
-                    DateBegin = DateTime.Now.AddMinutes(15),
-                    DateEnd = DateTime.Now.EndOfDay()
+                    DateBegin = currentTime.AddMinutes(15),
+                    DateEnd = currentTime.EndOfDay()
                 };
             }
         }

@@ -63,14 +63,14 @@ namespace PicBoy.Core.Logic
         {
             using (var repo = new EventRepository())
             {
-                var intersectDates = repo.GetAll(e => (e.DateBegin < newEvent.DateEnd && newEvent.DateBegin < e.DateEnd));
+                var intersectDates = repo.GetAll(e => (e.DateBegin < newEvent.DateEnd && newEvent.DateBegin < e.DateEnd) && e.Id != newEvent.Id);
 
                 if (intersectDates.Count == 0)
                 {
                     return string.Empty;
                 }
 
-                var message = "Some events already exists in this period." + Environment.NewLine + "...";
+                var message = "Some events already exists in this period." + Environment.NewLine;
                 message = intersectDates.Take(5).Aggregate(message, (current, eventDate) => current +
                 (eventDate.Name + " " + eventDate.DateBegin.ToString(DateFormat) + " - " + eventDate.DateEnd.ToString(DateFormat) + ", "));
                 if (intersectDates.Count > 5)

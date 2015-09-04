@@ -54,7 +54,10 @@ namespace PicBoy.Core.DataAccess
             base.Seed(context);
             _context = context;
 
-            Insert(new Event { DateBegin = DateTime.Now, DateEnd = DateTime.Now.AddMinutes(25), Name = "Test this new and amazing PicBoy device." });
+            var currentTime = DateTime.Now;
+            currentTime = currentTime.AddMilliseconds(-currentTime.Millisecond);
+
+            Insert(new Event { DateBegin = currentTime, DateEnd = currentTime.AddMinutes(25), Name = "Test this new and amazing PicBoy device." });
         }
 
         /// <summary>
