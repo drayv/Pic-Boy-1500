@@ -188,18 +188,18 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding DateBegin, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="{DynamicResource GreenForeground}"
+                            <TextBlock Grid.Column="0" Text="{Binding DateBegin, StringFormat='dd:MM:yyyy HH:mm'}" Foreground="{DynamicResource GreenForeground}"
                                        VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
                             <TextBlock Grid.Column="1" Text=" - " Foreground="{DynamicResource WhiteForeground}" VerticalAlignment="Center"
                                        TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
-                            <TextBlock Grid.Column="2" Text="{Binding DateEnd, StringFormat='yyyy-MM-dd HH:mm'}" Foreground="{DynamicResource YellowForeground}"
+                            <TextBlock Grid.Column="2" Text="{Binding DateEnd, StringFormat='dd:MM:yyyy HH:mm'}" Foreground="{DynamicResource YellowForeground}"
                                        VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Courier New" d:DataContext="{d:DesignInstance}" />
                             <Button x:Name="EditEvent" Grid.Column="3" Content="/" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
                                     Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource EditForeground}" 
-                                    FontFamily="Courier New" />
+                                    FontFamily="Courier New" Click="EditEvent_Click" />
                             <Button x:Name="DeleteEvent" Grid.Column="4" Content="X" Margin="10,0,0,0" Width="Auto" Height="Auto" VerticalAlignment="Center"
                                     Background="{x:Null}" BorderBrush="{DynamicResource WhiteBorderBrush}" Foreground="{DynamicResource RedForeground}" 
-                                    FontFamily="Courier New" />
+                                    FontFamily="Courier New" Click="DeleteEvent_Click" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

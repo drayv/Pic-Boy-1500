@@ -15,7 +15,7 @@ namespace PicBoy.Core.DataAccess
         public PicBoyContainer()
             : base("name=PicBoy")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExistsInitializer<PicBoyContainer>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChangesAndSeed<PicBoyContainer>());
         }
 
         /// <summary>
@@ -30,6 +30,7 @@ namespace PicBoy.Core.DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>().HasKey(f => f.Id);
+            modelBuilder.Entity<Event>().Property(e => e.Name).HasMaxLength(50);
         }
     }
 
@@ -37,7 +38,7 @@ namespace PicBoy.Core.DataAccess
     /// Creates database with test data if not exist.
     /// </summary>
     /// <typeparam name="TContext">Database context.</typeparam>
-    public class CreateDatabaseIfNotExistsInitializer<TContext> : CreateDatabaseIfNotExists<TContext> where TContext : DbContext
+    public class DropCreateDatabaseIfModelChangesAndSeed<TContext> : DropCreateDatabaseIfModelChanges<TContext> where TContext : DbContext
     {
         /// <summary>
         /// Database context.

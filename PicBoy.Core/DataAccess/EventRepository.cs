@@ -84,6 +84,7 @@ namespace PicBoy.Core.DataAccess
         /// <param name="entityToDelete">Entity to delete.</param>
         public void Delete(Event entityToDelete)
         {
+            _context.Set<Event>().Attach(entityToDelete);
             _context.Set<Event>().Remove(entityToDelete);
         }
 

@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using PicBoy.Core.Logic;
@@ -27,6 +30,7 @@ namespace PicBoy.Forms
         /// </summary>
         public MainWindow()
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             InitializeComponent();
             LogoText.Text = @"    ____  _            ____                   _____________  ____ 
    / __ \(_)____      / __ )____  __  __     <  / ____/ __ \/ __ \
@@ -45,7 +49,7 @@ namespace PicBoy.Forms
         /// </summary>
         private void NewEvent_Click(object sender, RoutedEventArgs e)
         {
-            var addEventForm = new AddEvent(Events)
+            var manageEventForm = new ManageEvent(Events)
             {
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -55,7 +59,42 @@ namespace PicBoy.Forms
             };
 
             Visibility = Visibility.Collapsed;
-            addEventForm.ShowDialog();
+            manageEventForm.ShowDialog();
+        }
+
+        private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+        {
+            var currentEvent = ((FrameworkElement)sender).DataContext as Event;
+
+            try
+            {
+                EventWorker.DeleteEvent(currentEvent);
+                Events.Remove(currentEvent);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                MessageBox.Show(msg, "Error.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EditEvent_Click(object sender, RoutedEventArgs e)
+        {
+            var currentEvent = ((FrameworkElement)sender).DataContext as Event;
+            var manageEventForm = new ManageEvent(Events)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Width = Width,
+                Height = Height,
+                LogoText = {Text = LogoText.Text},
+                SaveEvent = {Visibility = Visibility.Collapsed},
+                SaveEventChanges = {Visibility = Visibility.Visible},
+                ManagedEvent = currentEvent
+            };
+
+            Visibility = Visibility.Collapsed;
+            manageEventForm.ShowDialog();
         }
 
         /// <summary>
